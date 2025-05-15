@@ -7,6 +7,11 @@
   * `get_ces_subset()` - Get a subset of variables from a CES dataset
   * `create_codebook()` - Generate a comprehensive codebook for CES datasets
   * `export_codebook()` - Export codebooks to CSV or Excel formats
+  * `examine_metadata()` - Analyze metadata across variables in a dataset
+* Enhanced metadata preservation:
+  * Metadata preservation is now enabled by default
+  * All variable labels and value labels are automatically maintained
+  * Complete preservation of original dataset attributes for better data documentation
 * Supported datasets from 1965 to 2021
 * Added vignette and examples
 * Included support for variable documentation and metadata exploration

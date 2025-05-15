@@ -9,6 +9,7 @@ get_ces(
   format = "tibble",
   language = "en",
   clean = TRUE,
+  preserve_metadata = TRUE,
   use_cache = TRUE
 )
 }
@@ -25,6 +26,10 @@ Default is "en" (English). Alternative is "fr" (French).}
 
 \item{clean}{Logical indicating whether to clean the data (recode variables,
 convert factors, etc.). Default is TRUE.}
+
+\item{preserve_metadata}{Logical indicating whether to prioritize preserving all
+variable metadata (labels, attributes) over standardization. Default is TRUE.
+This ensures all original question labels and value labels are maintained.}
 
 \item{use_cache}{Logical indicating whether to use cached data if available.
 Default is TRUE.}

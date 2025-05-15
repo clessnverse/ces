@@ -64,6 +64,42 @@ ces_df <- get_ces("2019", format = "data.frame")
 
 # Bypass cache and download fresh data
 ces_fresh <- get_ces("2019", use_cache = FALSE)
+
+# Disable metadata preservation if needed (not recommended)
+ces_without_metadata <- get_ces("2019", preserve_metadata = FALSE)
+```
+
+#### Working with Variable Metadata
+
+CES datasets contain rich metadata including question text and value labels. The package preserves this metadata, which you can access:
+
+```{r eval=FALSE}
+# All metadata is preserved by default
+ces_data <- get_ces("2019")
+
+# Access variable label (question text)
+attr(ces_data$vote_choice, "label")
+
+# Access value labels
+attr(ces_data$vote_choice, "labels")
+
+# See all attributes of a variable
+attributes(ces_data$vote_choice)
+```
+
+You can also examine metadata across the entire dataset with the `examine_metadata()` function:
+
+```{r eval=FALSE}
+# Get an overview of all variables with metadata
+metadata_summary <- examine_metadata(ces_data)
+
+# Show the first few entries
+head(metadata_summary)
+
+# Find variables with value labels about voting
+voting_metadata <- examine_metadata(ces_data, 
+                                  show_labels = TRUE,
+                                  variable_pattern = "vote")
 ```
 
 ## Working with Subsets of Variables

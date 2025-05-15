@@ -22,14 +22,20 @@ devtools::install_github("laurenceomfoisy/ces")
 ```r
 library(ces)
 
-# Get the 2019 CES data
+# Get the 2019 CES data (metadata is preserved by default)
 ces_2019 <- get_ces("2019")
+
+# If you need to disable metadata preservation (uncommon)
+# ces_2019_minimal <- get_ces("2019", preserve_metadata = FALSE)
 
 # View available datasets
 list_ces_datasets()
 
 # Create a codebook for the dataset
 codebook <- create_codebook(ces_2019)
+
+# Examine variable metadata
+metadata <- examine_metadata(ces_2019, variable_pattern = "vote")
 
 # Get subset of variables about voting behavior
 voting_data <- get_ces_subset("2019", variables = c("vote_choice", "turnout"))
@@ -41,6 +47,8 @@ voting_data <- get_ces_subset("2019", variables = c("vote_choice", "turnout"))
 - Consistent data format across years
 - Simple filtering and subsetting functions
 - Automatic generation of variable codebooks
+- Complete preservation of variable metadata (labels, value labels)
+- Metadata examination tools
 - Export capabilities for sharing dataset documentation
 
 ## License
