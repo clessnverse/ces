@@ -1,0 +1,16 @@
+citHeader("To cite ces in publications use:")
+
+citEntry(
+  entry    = "Manual",
+  title    = "ces: Access to Canadian Election Study Data",
+  author   = "Laurence-Olivier M. Foisy",
+  year     = "2023",
+  note     = "R package version 0.1.0",
+  url      = "https://github.com/laurenceomfoisy/ces",
+  textVersion = paste(
+    "M. Foisy, L.-O. (2023).",
+    "ces: Access to Canadian Election Study Data.",
+    "R package version 0.1.0.",
+    "https://github.com/laurenceomfoisy/ces"
+  )
+)

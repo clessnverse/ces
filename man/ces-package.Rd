@@ -11,13 +11,13 @@ Provides tools to easily access and analyze Canadian Election Study data. The pa
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/username/ces}
-  \item Report bugs at \url{https://github.com/username/ces/issues}
+  \item \url{https://github.com/laurenceomfoisy/ces}
+  \item Report bugs at \url{https://github.com/laurenceomfoisy/ces/issues}
 }
 
 }
 \author{
-\strong{Maintainer}: First Last \email{first.last@example.com} (\href{https://orcid.org/YOUR-ORCID-ID}{ORCID})
+\strong{Maintainer}: Laurence-Olivier M. Foisy \email{mail@mfoisy.com} (\href{https://orcid.org/0009-0004-7505-9477}{ORCID})
 
 }
 \keyword{internal}

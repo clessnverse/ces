@@ -14,7 +14,7 @@ And the development version from GitHub with:
 
 ```r
 # install.packages("devtools")
-devtools::install_github("username/ces")
+devtools::install_github("laurenceomfoisy/ces")
 ```
 
 ## Example
@@ -27,14 +27,21 @@ ces_2019 <- get_ces("2019")
 
 # View available datasets
 list_ces_datasets()
+
+# Create a codebook for the dataset
+codebook <- create_codebook(ces_2019)
+
+# Get subset of variables about voting behavior
+voting_data <- get_ces_subset("2019", variables = c("vote_choice", "turnout"))
 ```
 
 ## Features
 
-- Easy access to CES datasets from various years
+- Easy access to CES datasets from various years (1965-2021)
 - Consistent data format across years
 - Simple filtering and subsetting functions
-- Documentation of variables and codebooks
+- Automatic generation of variable codebooks
+- Export capabilities for sharing dataset documentation
 
 ## License
 

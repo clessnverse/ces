@@ -79,6 +79,40 @@ ces_subset <- get_ces_subset("2019", variables)
 vote_vars <- get_ces_subset("2019", "vote", regex = TRUE)
 ```
 
+## Understanding Variables with Codebooks
+
+CES datasets contain many variables with complex coding schemes. The `create_codebook()` function helps you understand these variables:
+
+```{r eval=FALSE}
+# Get 2019 data
+ces_2019 <- get_ces("2019")
+
+# Create a codebook
+codebook <- create_codebook(ces_2019)
+
+# View the first few entries
+head(codebook)
+
+# Find variables about a specific topic
+library(dplyr)
+voting_vars <- codebook %>%
+  filter(grepl("vote|voted", question, ignore.case = TRUE)) %>%
+  pull(variable)
+
+# Use these variables in your analysis
+voting_data <- get_ces_subset("2019", variables = voting_vars)
+```
+
+You can also export the codebook to a CSV or Excel file:
+
+```{r eval=FALSE}
+# Export to CSV 
+export_codebook(codebook, "ces_2019_codebook.csv")
+
+# Export to Excel (requires openxlsx package)
+export_codebook(codebook, "ces_2019_codebook.xlsx")
+```
+
 ## Example Analysis
 
 Here's a simple example of how to use the package to analyze voting patterns:
