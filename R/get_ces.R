@@ -16,8 +16,14 @@
 #'   This ensures all original question labels and value labels are maintained.
 #' @param use_cache Logical indicating whether to use cached data if available.
 #'   Default is TRUE.
+#' @param verbose Logical indicating whether to display detailed progress messages
+#'   during data retrieval and processing. Default is TRUE.
 #'
 #' @return A tibble or data.frame containing the requested CES data.
+#'
+#' @note Official PDF codebooks for each CES year are available via the
+#'   \code{\link{download_codebook}} function, which provides detailed information
+#'   about variables, question wording, and methodology.
 #'
 #' @examples
 #' \dontrun{
@@ -26,10 +32,13 @@
 #'
 #' # Get the 1993 CES data, unprocessed
 #' ces_1993_raw <- get_ces("1993", clean = FALSE)
+#'
+#' # Download the official codebook
+#' download_codebook("2019")
 #' }
 #'
 #' @export
-get_ces <- function(year, format = "tibble", language = "en", clean = TRUE, preserve_metadata = TRUE, use_cache = TRUE) {
+get_ces <- function(year, format = "tibble", language = "en", clean = TRUE, preserve_metadata = TRUE, use_cache = TRUE, verbose = TRUE) {
   # Input validation
   valid_years <- ces_datasets$year
   
@@ -61,13 +70,31 @@ get_ces <- function(year, format = "tibble", language = "en", clean = TRUE, pres
   
   cache_file <- file.path(cache_dir, paste0("ces_", year, ".rds"))
   
+  # Create a helper function for conditional messaging
+  msg <- function(text) {
+    if (verbose) message(text)
+  }
+  
   if (use_cache && file.exists(cache_file)) {
+    msg(paste0("Using cached version of CES ", year, " data"))
     data <- readRDS(cache_file)
+    msg("Cached data loaded successfully")
   } else {
-    # Download the data
-    message("Downloading CES ", year, " data...")
+    # Download the data with optional verbosity
+    msg(paste0("Downloading CES ", year, " data from ", dataset_info$url))
     temp_file <- tempfile(fileext = ".dat")
-    utils::download.file(dataset_info$url, temp_file, mode = "wb", quiet = TRUE)
+    
+    # Show download progress based on verbose setting
+    utils::download.file(
+      url = dataset_info$url, 
+      destfile = temp_file, 
+      mode = "wb", 
+      quiet = !verbose,  # Show download progress if verbose
+      method = NULL,     # Auto-select the best method
+      cacheOK = FALSE    # Don't use cached version of file
+    )
+    
+    msg("Download complete. Processing data...")
     
     # Read the data based on format and encoding
     if (!requireNamespace("haven", quietly = TRUE)) {
@@ -100,27 +127,38 @@ get_ces <- function(year, format = "tibble", language = "en", clean = TRUE, pres
       }
     }
     
+    # Show information about the loaded dataset
+    msg(paste0("Data loaded successfully: ", nrow(data), " rows and ", ncol(data), " columns"))
+    
     # Save to cache
     if (use_cache) {
+      msg("Saving data to cache for faster future access...")
       saveRDS(data, cache_file)
+      msg(paste0("Data cached at: ", cache_file))
     }
     
     # Clean up temporary files
+    msg("Cleaning up temporary files...")
     unlink(temp_file)
   }
   
   # Clean the data if requested
   if (clean) {
+    msg("Cleaning and processing the data...")
     if (preserve_metadata) {
       # Use more careful cleaning to preserve metadata
+      msg("Using metadata-preserving cleaning method")
       data <- clean_ces_data_preserve_metadata(data, year, language)
     } else {
       # Use standard cleaning
+      msg("Using standard cleaning method")
       data <- clean_ces_data(data, year, language)
     }
+    msg("Data cleaning complete")
   }
   
   # Convert to requested format
+  msg(paste0("Converting data to ", format, " format..."))
   if (format == "tibble") {
     if (!requireNamespace("tibble", quietly = TRUE)) {
       warning("Package 'tibble' is required to return a tibble. Returning a data.frame instead.")
@@ -131,6 +169,8 @@ get_ces <- function(year, format = "tibble", language = "en", clean = TRUE, pres
   } else if (format == "data.frame") {
     data <- as.data.frame(data)
   }
+  
+  msg(paste0("CES ", year, " dataset ready for use"))
   
   return(data)
 }

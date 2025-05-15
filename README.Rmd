@@ -41,7 +41,10 @@ devtools::install_github("laurenceomfoisy/ces")
 - Consistent data format across years
 - Simple filtering and subsetting functions
 - Automatic generation of variable codebooks
+- Complete preservation of variable metadata (labels, value labels)
+- Metadata examination tools
 - Export capabilities for sharing dataset documentation
+- Official PDF codebook downloads for all datasets
 
 ## Basic Usage
 
@@ -60,6 +63,9 @@ head(codebook)
 
 # Get subset of variables about voting behavior
 voting_data <- get_ces_subset("2019", variables = c("vote_choice", "turnout"))
+
+# Download the official codebook PDF
+download_codebook("2019")
 ```
 
 ## Example Analysis
@@ -127,6 +133,16 @@ voting_vars <- dplyr::filter(codebook, grepl("vote|ballot", question, ignore.cas
 export_codebook(codebook, "ces_2019_codebook.csv")
 ```
 
+## Acknowledgments and Disclaimers
+
+### Data Source
+This package accesses data from the [Borealis Data repository](https://borealisdata.ca/), which serves as the official host for the Canadian Election Study datasets. We gratefully acknowledge Borealis Data for maintaining and providing access to these valuable datasets.
+
+The package author is not affiliated with the Canadian Election Study or Borealis Data. Users of this package should properly cite the original Canadian Election Study data in their research publications.
+
+### Package Development
+This package was developed with assistance from Claude Sonnet 3.7, an AI assistant by Anthropic. Claude helped with structuring the package, writing documentation, and implementing the core functionality. The collaboration between the human author and AI demonstrates how these tools can be used to create helpful resources for the research community.
+
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
@@ -138,3 +154,5 @@ If you use this package in your research, please cite it:
 ```{r eval=FALSE}
 citation("ces")
 ```
+
+Additionally, please cite the original Canadian Election Study data according to their citation guidelines.

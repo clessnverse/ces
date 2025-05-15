@@ -92,11 +92,28 @@ ces_datasets <- tibble(
     "2015 Canadian Election Study - Online and Phone Surveys",
     "2019 Canadian Election Study - Online and Phone Surveys",
     "2021 Canadian Election Study - Online Survey"
+  ),
+  codebook_url = c(
+    "https://borealisdata.ca/api/access/datafile/563560", # 1965
+    "https://borealisdata.ca/api/access/datafile/563415", # 1968
+    "https://borealisdata.ca/api/access/datafile/563334", # 1974-1980
+    "https://borealisdata.ca/api/access/datafile/563316", # 1984
+    "https://borealisdata.ca/api/access/datafile/563269", # 1988
+    "https://borealisdata.ca/api/access/datafile/563432", # 1993
+    "https://borealisdata.ca/api/access/datafile/563289", # 1997
+    "https://borealisdata.ca/api/access/datafile/563551", # 2000
+    "https://borealisdata.ca/api/access/datafile/563285", # 2004
+    "https://borealisdata.ca/api/access/datafile/563285", # 2006
+    "https://borealisdata.ca/api/access/datafile/563226", # 2008
+    "https://borealisdata.ca/api/access/datafile/563355", # 2011
+    "https://borealisdata.ca/api/access/datafile/563239", # 2015
+    "https://borealisdata.ca/api/access/datafile/563276", # 2019
+    "https://borealisdata.ca/api/access/datafile/658980"  # 2021
   )
 )
 
-# Save this as an internal data object
-usethis::use_data(ces_datasets, internal = TRUE)
+# Save this as an internal data object (overwrite existing data)
+usethis::use_data(ces_datasets, internal = TRUE, overwrite = TRUE)
 
 # Could also prepare a sample dataset for examples
 # This would be a small subset of one of the CES datasets

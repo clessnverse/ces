@@ -6,7 +6,7 @@
 \alias{ces-package}
 \title{ces: Access to Canadian Election Study Data}
 \description{
-Provides tools to easily access and analyze Canadian Election Study data. The package simplifies the process of downloading, cleaning, and using CES datasets for political science research and analysis. The Canadian Election Study (CES) has been conducted during federal elections since 1965, surveying Canadians on their political preferences, engagement, and demographics.
+Provides tools to easily access and analyze Canadian Election Study data. The package simplifies the process of downloading, cleaning, and using CES datasets for political science research and analysis. The Canadian Election Study (CES) has been conducted during federal elections since 1965, surveying Canadians on their political preferences, engagement, and demographics. Data is accessed from the Borealis Data repository, which serves as the official host for CES datasets. This package is not officially affiliated with the Canadian Election Study or Borealis Data, and users should cite the original data sources in their work.
 }
 \seealso{
 Useful links:

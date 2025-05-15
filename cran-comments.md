@@ -2,7 +2,8 @@
 
 0 errors | 0 warnings | 0 notes
 
-* This is a new release.
+* All checks pass cleanly
+* Time verification has been disabled via the recommended approach (_R_CHECK_SYSTEM_CLOCK_=0)
 
 ## Downstream dependencies
 

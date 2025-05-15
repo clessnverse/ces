@@ -10,7 +10,8 @@ get_ces(
   language = "en",
   clean = TRUE,
   preserve_metadata = TRUE,
-  use_cache = TRUE
+  use_cache = TRUE,
+  verbose = TRUE
 )
 }
 \arguments{
@@ -33,12 +34,20 @@ This ensures all original question labels and value labels are maintained.}
 
 \item{use_cache}{Logical indicating whether to use cached data if available.
 Default is TRUE.}
+
+\item{verbose}{Logical indicating whether to display detailed progress messages
+during data retrieval and processing. Default is TRUE.}
 }
 \value{
 A tibble or data.frame containing the requested CES data.
 }
 \description{
 This function downloads and processes a Canadian Election Study dataset for the specified year.
+}
+\note{
+Official PDF codebooks for each CES year are available via the
+\code{\link{download_codebook}} function, which provides detailed information
+about variables, question wording, and methodology.
 }
 \examples{
 \dontrun{
@@ -47,6 +56,9 @@ ces_2019 <- get_ces("2019")
 
 # Get the 1993 CES data, unprocessed
 ces_1993_raw <- get_ces("1993", clean = FALSE)
+
+# Download the official codebook
+download_codebook("2019")
 }
 
 }

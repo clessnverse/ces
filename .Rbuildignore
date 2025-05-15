@@ -11,3 +11,7 @@
 ^cran-comments\.md$
 ^doc$
 ^Meta$
+^tools$
+# Configuration files
+^[.]travis[.]yml$
+^_pkgdown[.]yml$

@@ -6,8 +6,8 @@ library(ces)
 all_datasets <- list_ces_datasets(details = TRUE)
 print(all_datasets)
 
-# 2. Download the 2019 CES data
-ces_2019 <- get_ces("2019")
+# 2. Download the 2019 CES data with full progress information
+ces_2019 <- get_ces("2019", verbose = TRUE)
 
 # 3. Look at the structure of the data
 str(ces_2019, max.level = 1)

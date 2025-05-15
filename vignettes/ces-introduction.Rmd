@@ -67,6 +67,9 @@ ces_fresh <- get_ces("2019", use_cache = FALSE)
 
 # Disable metadata preservation if needed (not recommended)
 ces_without_metadata <- get_ces("2019", preserve_metadata = FALSE)
+
+# Silent mode - no progress messages
+ces_silent <- get_ces("2019", verbose = FALSE)
 ```
 
 #### Working with Variable Metadata
@@ -139,7 +142,7 @@ voting_vars <- codebook %>%
 voting_data <- get_ces_subset("2019", variables = voting_vars)
 ```
 
-You can also export the codebook to a CSV or Excel file:
+You can export the codebook to a CSV or Excel file:
 
 ```{r eval=FALSE}
 # Export to CSV 
@@ -147,6 +150,16 @@ export_codebook(codebook, "ces_2019_codebook.csv")
 
 # Export to Excel (requires openxlsx package)
 export_codebook(codebook, "ces_2019_codebook.xlsx")
+```
+
+You can also download the official PDF codebook documents:
+
+```{r eval=FALSE}
+# Download the official CES codebook PDF
+download_codebook("2019")
+
+# Download to a specific folder
+download_codebook("2015", path = "~/Documents/CES_codebooks")
 ```
 
 ## Example Analysis
@@ -176,3 +189,11 @@ if (requireNamespace("dplyr", quietly = TRUE)) {
 The `ces` package aims to make working with Canadian Election Study data more accessible to R users. By handling the downloading, storage, and initial processing of these datasets, researchers can focus on analysis rather than data wrangling.
 
 For more information about the Canadian Election Study, visit the official website or refer to the dataset documentation.
+
+## Acknowledgments
+
+This package accesses data from the [Borealis Data repository](https://borealisdata.ca/), which serves as the official host for the Canadian Election Study datasets. We gratefully acknowledge Borealis Data for maintaining and providing access to these valuable datasets.
+
+**Important Disclaimer**: This package is not officially affiliated with the Canadian Election Study or Borealis Data. Users of this package should properly cite the original Canadian Election Study data in their research publications according to the citation guidelines provided by the CES.
+
+The package was developed with assistance from Claude Sonnet 3.7, an AI assistant by Anthropic, demonstrating how these tools can be used to create helpful resources for the research community.
