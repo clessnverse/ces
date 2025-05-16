@@ -13,9 +13,18 @@
 #' @return Normalized absolute path
 #' @keywords internal
 normalize_path <- function(path, must_work = FALSE) {
-  # Convert to absolute path with proper separators for the OS
+  # Convert to absolute path with consistent separators
+  # For cross-platform compatibility, always use forward slashes
+  # (R functions work with forward slashes even on Windows)
   tryCatch({
-    normalizePath(path, mustWork = must_work, winslash = .Platform$file.sep)
+    path_normalized <- normalizePath(path, mustWork = must_work)
+    
+    # If we're on Windows, convert backslashes to forward slashes for consistency
+    if (.Platform$OS.type == "windows") {
+      path_normalized <- gsub("\\\\", "/", path_normalized)
+    }
+    
+    return(path_normalized)
   }, error = function(e) {
     # If normalization fails and path doesn't have to work, return original
     if (!must_work) return(path)

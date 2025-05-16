@@ -287,11 +287,17 @@ test_that("path normalization works consistently", {
     })
   }
   
-  # Now test with a valid path
-  expect_equal(
-    normalize_path(cur_path, must_work = TRUE),
-    normalizePath(cur_path, mustWork = TRUE)
-  )
+  # Now test with a valid path - handle Windows backslash differences
+  # On Windows, paths can be normalized with either forward or backslashes
+  # So instead of direct equality, we check path equivalence
+  norm_path1 <- normalize_path(cur_path, must_work = TRUE)
+  norm_path2 <- normalizePath(cur_path, mustWork = TRUE)
+  
+  # Replace all backslashes with forward slashes for comparison
+  norm_path1_std <- gsub("\\\\", "/", norm_path1)
+  norm_path2_std <- gsub("\\\\", "/", norm_path2)
+  
+  expect_equal(norm_path1_std, norm_path2_std)
 })
 
 # Mock test for functions that use ces_datasets internal data
