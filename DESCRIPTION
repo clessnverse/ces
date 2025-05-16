@@ -31,7 +31,7 @@ Imports:
     tibble,
     utils
 VignetteBuilder: knitr
-URL: https://github.com/laurenceomfoisy/ces
-BugReports: https://github.com/laurenceomfoisy/ces/issues
+URL: https://github.com/clessnverse/ces
+BugReports: https://github.com/clessnverse/ces/issues
 Depends: 
     R (>= 3.5)

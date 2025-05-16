@@ -4,15 +4,15 @@ citEntry(
   entry    = "Manual",
   title    = "ces: Access to Canadian Election Study Data",
   author   = "Laurence-Olivier M. Foisy",
-  year     = "2023",
+  year     = "2025",
   note     = "R package version 0.1.0. Developed with assistance from Claude Sonnet 3.7 AI.",
-  url      = "https://github.com/laurenceomfoisy/ces",
+  url      = "https://github.com/clessnverse/ces",
   textVersion = paste(
-    "M. Foisy, L.-O. (2023).",
+    "M. Foisy, L.-O. (2025).",
     "ces: Access to Canadian Election Study Data.",
     "R package version 0.1.0.",
     "Developed with assistance from Claude Sonnet 3.7 AI.",
-    "https://github.com/laurenceomfoisy/ces"
+    "https://github.com/clessnverse/ces"
   )
 )
 
