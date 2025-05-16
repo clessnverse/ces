@@ -42,6 +42,12 @@ voting_data <- get_ces_subset("2019", variables = c("vote_choice", "turnout"))
 
 # Download the official codebook PDF
 download_pdf_codebook("2019")
+
+# Download a single dataset
+download_ces_dataset("2019", path = "~/CES_data")
+
+# Download all datasets at once
+download_all_ces_datasets(path = "~/CES_data")
 ```
 
 ## Features

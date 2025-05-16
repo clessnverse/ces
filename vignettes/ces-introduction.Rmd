@@ -162,6 +162,19 @@ download_pdf_codebook("2019")
 download_pdf_codebook("2015", path = "~/Documents/CES_codebooks")
 ```
 
+The package also allows downloading the raw data files directly:
+
+```{r eval=FALSE}
+# Download a single CES dataset
+download_ces_dataset("2019", path = "~/Documents/CES_datasets")
+
+# Download all available CES datasets to a folder
+download_all_ces_datasets(path = "~/Documents/CES_datasets")
+
+# Download only specific years
+download_all_ces_datasets(years = c("2015", "2019", "2021"))
+```
+
 ## Example Analysis
 
 Here's a simple example of how to use the package to analyze voting patterns:
