@@ -46,7 +46,7 @@ This function downloads and processes a Canadian Election Study dataset for the 
 }
 \note{
 Official PDF codebooks for each CES year are available via the
-\code{\link{download_codebook}} function, which provides detailed information
+\code{\link{download_pdf_codebook}} function, which provides detailed information
 about variables, question wording, and methodology.
 }
 \examples{
@@ -58,7 +58,7 @@ ces_2019 <- get_ces("2019")
 ces_1993_raw <- get_ces("1993", clean = FALSE)
 
 # Download the official codebook
-download_codebook("2019")
+download_pdf_codebook("2019")
 }
 
 }

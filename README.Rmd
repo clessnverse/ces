@@ -65,7 +65,7 @@ head(codebook)
 voting_data <- get_ces_subset("2019", variables = c("vote_choice", "turnout"))
 
 # Download the official codebook PDF
-download_codebook("2019")
+download_pdf_codebook("2019")
 ```
 
 ## Example Analysis

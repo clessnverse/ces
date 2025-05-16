@@ -22,7 +22,7 @@
 #' @return A tibble or data.frame containing the requested CES data.
 #'
 #' @note Official PDF codebooks for each CES year are available via the
-#'   \code{\link{download_codebook}} function, which provides detailed information
+#'   \code{\link{download_pdf_codebook}} function, which provides detailed information
 #'   about variables, question wording, and methodology.
 #'
 #' @examples
@@ -34,7 +34,7 @@
 #' ces_1993_raw <- get_ces("1993", clean = FALSE)
 #'
 #' # Download the official codebook
-#' download_codebook("2019")
+#' download_pdf_codebook("2019")
 #' }
 #'
 #' @export

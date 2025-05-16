@@ -1,4 +1,4 @@
-#' Download Canadian Election Study Codebook PDF
+#' Download Canadian Election Study PDF Codebook
 #'
 #' This function downloads the official PDF codebook for a specified year of the Canadian
 #' Election Study. The codebook contains detailed information about all variables,
@@ -9,7 +9,7 @@
 #'   "1997", "2000", "2004", "2006", "2008", "2011", "2015", "2019", "2021".
 #' @param path A character string indicating the directory where the codebook should
 #'   be saved. If NULL (default), the codebook will be saved to the current
-#'   working directory or the system's Downloads folder if it exists.
+#'   working directory.
 #' @param overwrite Logical indicating whether to overwrite existing files.
 #'   Default is FALSE.
 #' @param verbose Logical indicating whether to display detailed progress messages
@@ -19,18 +19,18 @@
 #'
 #' @examples
 #' \dontrun{
-#' # Download the 2019 CES codebook to the default location
-#' download_codebook("2019")
+#' # Download the 2019 CES codebook to the current directory
+#' download_pdf_codebook("2019")
 #'
 #' # Download to a specific directory
-#' download_codebook("2015", path = "~/Documents/CES_codebooks")
+#' download_pdf_codebook("2015", path = "~/Documents/CES_codebooks")
 #' 
 #' # Overwrite existing file
-#' download_codebook("2021", overwrite = TRUE)
+#' download_pdf_codebook("2021", overwrite = TRUE)
 #' }
 #'
 #' @export
-download_codebook <- function(year, path = NULL, overwrite = FALSE, verbose = TRUE) {
+download_pdf_codebook <- function(year, path = NULL, overwrite = FALSE, verbose = TRUE) {
   # Input validation
   valid_years <- c("1965", "1968", "1974-1980", "1984", "1988", "1993", 
                    "1997", "2000", "2004", "2006", "2008", "2011", 
@@ -50,17 +50,9 @@ download_codebook <- function(year, path = NULL, overwrite = FALSE, verbose = TR
   # Get the codebook URL for the requested year
   codebook_url <- dataset_info$codebook_url
   
-  # If path is NULL, use a sensible default
+  # If path is NULL, use current directory
   if (is.null(path)) {
-    # Try to find the Downloads folder
-    downloads_dir <- file.path(Sys.getenv("HOME"), "Downloads")
-    
-    if (dir.exists(downloads_dir)) {
-      path <- downloads_dir
-    } else {
-      # Fall back to current working directory
-      path <- getwd()
-    }
+    path <- getwd()
   }
   
   # Create the directory if it doesn't exist

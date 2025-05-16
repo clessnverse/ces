@@ -41,7 +41,7 @@ metadata <- examine_metadata(ces_2019, variable_pattern = "vote")
 voting_data <- get_ces_subset("2019", variables = c("vote_choice", "turnout"))
 
 # Download the official codebook PDF
-download_codebook("2019")
+download_pdf_codebook("2019")
 ```
 
 ## Features

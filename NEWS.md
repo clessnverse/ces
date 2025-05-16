@@ -8,7 +8,7 @@
   * `create_codebook()` - Generate a comprehensive codebook for CES datasets
   * `export_codebook()` - Export codebooks to CSV or Excel formats
   * `examine_metadata()` - Analyze metadata across variables in a dataset
-  * `download_codebook()` - Download official PDF codebooks for any CES year
+  * `download_pdf_codebook()` - Download official PDF codebooks for any CES year
 * Enhanced metadata preservation:
   * Metadata preservation is now enabled by default
   * All variable labels and value labels are automatically maintained

@@ -156,10 +156,10 @@ You can also download the official PDF codebook documents:
 
 ```{r eval=FALSE}
 # Download the official CES codebook PDF
-download_codebook("2019")
+download_pdf_codebook("2019")
 
 # Download to a specific folder
-download_codebook("2015", path = "~/Documents/CES_codebooks")
+download_pdf_codebook("2015", path = "~/Documents/CES_codebooks")
 ```
 
 ## Example Analysis
