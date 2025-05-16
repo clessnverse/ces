@@ -55,21 +55,20 @@ download_pdf_codebook <- function(year, path = NULL, overwrite = FALSE, verbose 
     path <- getwd()
   }
   
+  # Normalize the path and create directory if needed
+  path <- normalize_path(path, must_work = FALSE)
+  
   # Create the directory if it doesn't exist
   if (!dir.exists(path)) {
-    if (verbose) message("Creating directory: ", path)
-    dir.create(path, recursive = TRUE, showWarnings = FALSE)
+    safe_dir_create(path, recursive = TRUE, verbose = verbose)
   }
   
   # Define the full file path
   file_name <- paste0("CES_", year, "_codebook.pdf")
   file_path <- file.path(path, file_name)
   
-  # Check if file already exists
-  if (file.exists(file_path) && !overwrite) {
-    stop("File already exists: ", file_path, 
-         "\nUse overwrite = TRUE to overwrite the existing file.")
-  }
+  # Check if file already exists and handle overwrite settings
+  check_file_conflict(file_path, overwrite)
   
   # Create a helper function for conditional messaging
   msg <- function(text) {
@@ -80,14 +79,13 @@ download_pdf_codebook <- function(year, path = NULL, overwrite = FALSE, verbose 
   msg(paste0("Downloading CES ", year, " codebook from ", codebook_url))
   msg(paste0("Saving to: ", file_path))
   
-  # Use utils::download.file with progress bar
+  # Use our safe download function with proper error handling
   tryCatch({
-    utils::download.file(
+    safe_download(
       url = codebook_url,
       destfile = file_path,
       mode = "wb",       # Binary mode for PDF files
-      quiet = !verbose,  # Show progress based on verbose setting
-      method = NULL      # Auto-select the best method
+      quiet = !verbose   # Show progress based on verbose setting
     )
     
     msg(paste0("Successfully downloaded codebook to: ", file_path))

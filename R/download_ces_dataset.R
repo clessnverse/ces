@@ -48,10 +48,12 @@ download_ces_dataset <- function(year, path = NULL, overwrite = FALSE, verbose =
     path <- getwd()
   }
   
+  # Normalize the path and create directory if needed
+  path <- normalize_path(path, must_work = FALSE)
+  
   # Create the directory if it doesn't exist
   if (!dir.exists(path)) {
-    msg(paste0("Creating directory: ", path))
-    dir.create(path, recursive = TRUE, showWarnings = FALSE)
+    safe_dir_create(path, recursive = TRUE, verbose = verbose)
   }
   
   # Get dataset information from internal data
@@ -75,24 +77,20 @@ download_ces_dataset <- function(year, path = NULL, overwrite = FALSE, verbose =
   file_name <- paste0("ces_", year, ".", file_ext)
   file_path <- file.path(path, file_name)
   
-  # Check if file already exists
-  if (file.exists(file_path) && !overwrite) {
-    stop("File already exists: ", file_path, 
-         "\nUse overwrite = TRUE to overwrite the existing file.")
-  }
+  # Check if file already exists and handle overwrite settings
+  check_file_conflict(file_path, overwrite)
   
   # Download the dataset
   msg(paste0("Downloading CES ", year, " dataset from ", url))
   msg(paste0("Saving to: ", file_path))
   
-  # Use utils::download.file with progress bar
+  # Use our safe download function with proper error handling
   tryCatch({
-    utils::download.file(
+    safe_download(
       url = url,
       destfile = file_path,
       mode = "wb",       # Binary mode for data files
-      quiet = !verbose,  # Show progress based on verbose setting
-      method = NULL      # Auto-select the best method
+      quiet = !verbose   # Show progress based on verbose setting
     )
     
     msg(paste0("Successfully downloaded dataset to: ", file_path))
